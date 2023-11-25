@@ -3,4 +3,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return render(request, 'mysite/index.html', {})
+    context = {
+        'title': 'Django Brog Site'
+	}
+    return render(request, 'mysite/index.html', context)
