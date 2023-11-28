@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'livereload', # pip install django-livereload-server
     'django.contrib.staticfiles',
     'mysite',
+    'blog',
 ]
 
 MIDDLEWARE = [
