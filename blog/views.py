@@ -4,7 +4,7 @@ from blog.models import Article
 
 def index(request):
     articles = Article.objects.all()
-    paginator = Paginator(articles, 2)
+    paginator = Paginator(articles, 1)
     page_number = request.GET.get('page')
     context = {
         'pagi_articles': paginator.get_page(page_number),
