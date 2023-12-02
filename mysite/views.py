@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.contrib.auth.views import LoginView
 from blog.models import Article
 
-# Create your views here.
 def index(request):
     articles = Article.objects.all()[:3]
     context = {
@@ -11,9 +10,5 @@ def index(request):
 	}
     return render(request, 'mysite/index.html', context)
 
-def login(request):
-    context = {}
-
-    if request.method == 'POST':
-        context['request'] = request.POST
-    return render(request, 'mysite/login.html', context)
+class Login(LoginView):
+    template_name = 'mysite/login.html'
