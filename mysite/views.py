@@ -13,4 +13,7 @@ def index(request):
 
 def login(request):
     context = {}
+
+    if request.method == 'POST':
+        context['request'] = request.POST
     return render(request, 'mysite/login.html', context)
