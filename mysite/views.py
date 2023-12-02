@@ -4,7 +4,7 @@ from blog.models import Article
 
 # Create your views here.
 def index(request):
-    articles = Article.objects.all()
+    articles = Article.objects.all()[:3]
     context = {
         'title': 'Django Brog Site',
         'articles': articles,
