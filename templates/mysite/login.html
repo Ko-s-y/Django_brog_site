@@ -8,13 +8,6 @@
       <h1 class="display-4 font-italic text-center "><a href="/" class="text-decoration-none">ReallySite</a></h1>
     </div>
     <div class="col-lg-3 m-auto ">
-
-      {% if user.is_authenticated %}
-      ログイン中です
-      {% else %}
-      ログインしていません
-      {% endif %}
-
       <form class="form-signin mx-4" method="POST">
 
         {% csrf_token %}
