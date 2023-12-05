@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
-from mysite.models import User
+from mysite.models.account_models import User
+from mysite.forms import UserCreationForm
 
 class CustomUserAdmin(UserAdmin):
     fieldsets = (
@@ -28,6 +29,7 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('email', 'password',),
         }),
     )
+    add_form = UserCreationForm  # adminでuser作成用
 
 admin.site.unregister(Group)
 admin.site.register(User, CustomUserAdmin)
