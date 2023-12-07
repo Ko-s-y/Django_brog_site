@@ -23,4 +23,5 @@ def signup(request):
             user = form.save(commit=False)
             # user.is_activa = False
             user.save()
+            return redirect('/')
     return render(request, 'mysite/auth.html', context)
