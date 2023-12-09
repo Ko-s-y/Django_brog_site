@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
 from mysite.forms import UserCreationForm
 from blog.models import Article
+from django.contrib import messages
 
 def index(request):
     articles = Article.objects.all()[:3]
@@ -21,7 +22,8 @@ def signup(request):
 
         if form.is_valid():
             user = form.save(commit=False)
-            # user.is_activa = False
+            # user.is_active = False
             user.save()
+            messages.success(request, '登録が完了しました！')
             return redirect('/')
     return render(request, 'mysite/auth.html', context)
