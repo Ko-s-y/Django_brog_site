@@ -15,6 +15,14 @@ def index(request):
 class Login(LoginView):
     template_name = 'mysite/auth.html'
 
+    def form_valid(self, form):
+        messages.success(self.request, 'ログインが完了しました！')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'ログインに失敗しました！')
+        return super().form_invalid(form)
+
 def signup(request):
     context = {}
     if request.method == 'POST':
