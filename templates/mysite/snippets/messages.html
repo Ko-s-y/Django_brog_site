@@ -1,0 +1,11 @@
+{% comment }
+メッセージです(検証ツールに表示されない)
+{% endcomment %}
+
+{% for message in messages %}
+<nav class="py-2 {{ message.tags }}">
+  <div class="container">
+    {{ message }}
+  </div>
+</nav>
+{% endfor %}
