@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
 from mysite.forms import UserCreationForm
 from blog.models import Article
