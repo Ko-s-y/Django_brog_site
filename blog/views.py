@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from blog.models import Article
+from blog.models import Article, Comment
 
 def index(request):
     articles = Article.objects.all()
@@ -14,7 +14,9 @@ def index(request):
 
 def article(request, pk):
     article = Article.objects.get(id=pk)
+    comments = Comment.objects.filter(article=article)
     context = {
-        'article': article
+        'article': article,
+        'comments': comments,
     }
     return render(request, 'blog/article.html', context)
