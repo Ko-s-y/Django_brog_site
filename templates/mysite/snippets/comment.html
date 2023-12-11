@@ -16,9 +16,10 @@
 
   {% if user.is_authenticated %}
   <form method="POST" class="my-4">
+    {% csrf_token %}
     <div class="mb-2">
       <label>コメント投稿</label>
-      <textarea class="rounded-0 bg-light form-control" rows="3"></textarea>
+      <textarea name="comment" class="rounded-0 bg-light form-control" rows="3"></textarea>
     </div>
     <div class="text-rigth">
       <button class="btn btn-sm btn-outline-success" type="submit">コメントする</button>
