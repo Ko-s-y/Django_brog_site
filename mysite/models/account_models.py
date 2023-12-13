@@ -52,5 +52,5 @@ from mysite.models.profile_models import Profile
 @receiver(post_save, sender=User)
 def create_onetoone(sender, **kwargs):
     if kwargs['created']:
-        profile.objects.create(user=kwargs['instance'])
+        Profile.objects.create(user=kwargs['instance'])
 # -- OneToOneFieldsを同時に作成 --
