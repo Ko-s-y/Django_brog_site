@@ -3,6 +3,7 @@ from django.contrib.auth.views import LoginView
 from mysite.forms import UserCreationForm, ProfileForm
 from blog.models import Article
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     articles = Article.objects.all()[:3]
@@ -36,6 +37,7 @@ def signup(request):
             return redirect('/')
     return render(request, 'mysite/auth.html', context)
 
+@login_required
 def mypage(request):
     context = {}
     if request.method == 'POST':
