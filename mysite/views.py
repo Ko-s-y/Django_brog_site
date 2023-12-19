@@ -4,6 +4,7 @@ from mysite.forms import UserCreationForm, ProfileForm
 from blog.models import Article
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 
 def index(request):
     articles = Article.objects.all()[:3]
@@ -33,6 +34,7 @@ def signup(request):
             user = form.save(commit=False)
             # user.is_active = False
             user.save()
+            login(request, user) # 登録後にログインさせる
             messages.success(request, '登録が完了しました！')
             return redirect('/')
     return render(request, 'mysite/auth.html', context)
