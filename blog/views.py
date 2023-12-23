@@ -16,12 +16,16 @@ def index(request):
 def article(request, pk):
     article = Article.objects.get(id=pk)
     if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.user = request.user
-            comment.article = article
-            comment.save()
+        if request.POST.get('like_count', None):
+            article.count += 1
+            article.save()
+        else:
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.user = request.user
+                comment.article = article
+                comment.save()
     comments = Comment.objects.filter(article=article)
     context = {
         'article': article,
