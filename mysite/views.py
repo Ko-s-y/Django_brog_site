@@ -7,10 +7,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 
 def index(request):
+    ranks = Article.objects.order_by('-count')[:2]
     articles = Article.objects.all()[:3]
     context = {
         'title': 'Django Brog Site',
         'articles': articles,
+        'ranks': ranks,
 	}
     return render(request, 'mysite/index.html', context)
 
