@@ -1,0 +1,5 @@
+{% for tag in article.tags.all %}
+<a href="/tags/{{ tag.slug }}" class="btn btn-sm btn-outline-secondary">
+  {{ tag.name }}
+</a>
+{% endfor %}
