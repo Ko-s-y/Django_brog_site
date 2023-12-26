@@ -1,7 +1,7 @@
 from django.contrib import admin
 from blog.models import Article, Comment, Tag
 
-class TagInline(admin.StackedInline):
+class TagInline(admin.TabularInline):
     model = Article.tags.through
 
 class ArticleAdmin(admin.ModelAdmin):
