@@ -5,7 +5,7 @@
 <main class="container">
   <div class="row">
     <div class="col-md-8">
-      <h3 class="pb-4 font-italic border-bottom">Django Brog</h3>
+      <h3 class="pb-4 font-italic border-bottom display-6">{{ page_title }}</h3>
 
       {% for article in pagi_articles %}
       <div class="blog-post">
@@ -28,7 +28,5 @@
 
   </div>
 </main>
-
-</nav>
 
 {% endblock %}
