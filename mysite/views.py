@@ -52,3 +52,7 @@ def mypage(request):
             profile.save()
             messages.success(request, '登録完了しました')
     return render(request, 'mysite/mypage.html', context)
+
+def contact(request):
+    context = {}
+    return render(request, 'mysite/contact.html', context)
