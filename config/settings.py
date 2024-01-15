@@ -28,10 +28,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-import yaml
-with open(os.path.join(BASE_DIR, 'secrets' ,'secret_dev.yaml')) as file:
-    obj = yaml.safe_load(file)
-    os.environ['password'] = obj['password']
+if DEBUG:
+    # 開発環境
+    import yaml
+    with open(os.path.join(BASE_DIR, 'secrets' ,'secret_dev.yaml')) as file:
+        objs = yaml.safe_load(file)
+        for obj in objs:
+            os.environ[obj] = objs[obj]
+else:
+    pass
 
 # Application definition
 
