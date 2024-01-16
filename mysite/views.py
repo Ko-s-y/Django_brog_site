@@ -5,6 +5,8 @@ from blog.models import Article
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+from django.core.mail import send_mail
+import os
 
 def index(request):
     ranks = Article.objects.order_by('-count')[:2]
@@ -55,15 +57,11 @@ def mypage(request):
 
 def contact(request):
     context = {}
-
-    from django.core.mail import send_mail
-    import os
-    subject = '題名'
-    message = '本文'
-    email_from = os.environ['DEFAULT_EMAIL_FROM']
-    email_to = [
-        os.environ['DEFAULT_EMAIL_FROM'],
-    ]
-    send_mail(subject, message, email_from, email_to)
+    if request.method == "POST":
+        subject = 'お問い合わせがありました'
+        message = "お問い合わせがありました。\n名前: {}\nメールアドレス: {}\n内容: {}".format(request.POST.get('name'), request.POST.get('email'), request.POST.get('content'))
+        email_from = os.environ['DEFAULT_EMAIL_FROM']
+        email_to = [os.environ['DEFAULT_EMAIL_FROM'],]
+        send_mail(subject, message, email_from, email_to)
 
     return render(request, 'mysite/contact.html', context)
