@@ -55,4 +55,15 @@ def mypage(request):
 
 def contact(request):
     context = {}
+
+    from django.core.mail import send_mail
+    import os
+    subject = '題名'
+    message = '本文'
+    email_from = os.environ['DEFAULT_EMAIL_FROM']
+    email_to = [
+        os.environ['DEFAULT_EMAIL_FROM'],
+    ]
+    send_mail(subject, message, email_from, email_to)
+
     return render(request, 'mysite/contact.html', context)
