@@ -5,6 +5,8 @@ from blog.models import Article
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 import os
 
@@ -43,17 +45,20 @@ def signup(request):
             return redirect('/')
     return render(request, 'mysite/auth.html', context)
 
-@login_required
-def mypage(request):
+class MypageView(LoginRequiredMixin, View):
     context = {}
-    if request.method == 'POST':
+
+    def get(self, request):
+        return render(request, 'mysite/mypage.html', self.context)
+
+    def post(self, request):
         form = ProfileForm(request.POST)
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
             messages.success(request, '登録完了しました')
-    return render(request, 'mysite/mypage.html', context)
+        return render(request, 'mysite/mypage.html', self.context)
 
 def contact(request):
     context = {}
