@@ -60,13 +60,16 @@ class MypageView(LoginRequiredMixin, View):
             messages.success(request, '登録完了しました')
         return render(request, 'mysite/mypage.html', self.context)
 
-def contact(request):
+class ContacView(View):
     context = {}
-    if request.method == "POST":
+
+    def get(self, request):
+        return render(request, 'mysite/contact.html', self.context)
+
+    def post(self, request):
         subject = 'お問い合わせがありました'
         message = "お問い合わせがありました。\n名前: {}\nメールアドレス: {}\n内容: {}".format(request.POST.get('name'), request.POST.get('email'), request.POST.get('content'))
         email_from = os.environ['DEFAULT_EMAIL_FROM']
         email_to = [os.environ['DEFAULT_EMAIL_FROM'],]
         send_mail(subject, message, email_from, email_to)
-
-    return render(request, 'mysite/contact.html', context)
+        return render(request, 'mysite/contact.html', self.context)
